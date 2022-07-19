@@ -10,6 +10,7 @@ function QuestionForm(props) {
     correctIndex: 0,
   });
 
+
   function handleChange(event) {
     setFormData({
       ...formData,
@@ -20,6 +21,14 @@ function QuestionForm(props) {
   function handleSubmit(event) {
     event.preventDefault();
     console.log(formData);
+    fetch('http://localhost:4000/questions',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(formData),
+
+    })
+    .then(resp =>resp.json())
+    .then(data => console.log(data));
   }
 
   return (
